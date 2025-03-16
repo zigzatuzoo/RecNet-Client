@@ -1,14 +1,20 @@
 from ..fsclient import FlareSolverrClient
+from ..exceptions import *
 
 class Accounts:
-    #https://apim.rec.net/accounts/account?username=Zigzatuzoo
     def GetAccountViaUsername(HTTPClient: FlareSolverrClient, Username: str):
+        """Returns the userdata of a user using the Username provided.
+        
+        Returns: Success(Bool),Response(str or json)"""
         url = "https://apim.rec.net/accounts/account?username="+Username
 
         return HTTPClient.get(url)
 
+
     #Currently trying to fix sending auth through FlareSolverr
     def GetMe(HTTPClient : FlareSolverrClient):
+        raise AuthNotImplimentedYet
+    
         token = HTTPClient.get_token()
         url = "https://accounts.rec.net/account/me"
 

@@ -105,7 +105,7 @@ ADD LATER
 ### If you want to add more API endpoints 
 - Please just go to ./src/recnetclient/APIs and follow the premade examples
 - If there is an endpoint you want to add that doesn't fit under the current files please make a new one with the class matching the name of the file and import it under the `__init__.py` file in the APIs folder 
-- ALSO as of writing this (3/16/25) I am still having issues figuring out authorized requests through FlareSolverr MITM Proxy so until that is fixed please either throw a NotImplimented error before the actual code or just ignore them for now
+- ALSO as of writing this (3/16/25) I am still having issues figuring out authorized requests through FlareSolverr MITM Proxy so until that is fixed please either raise a AuthNotImplimentedYet error via `raise AuthNotImplimentedYet` before the actual code or just ignore them for now
 
 ### If you want to contribute to the other parts of this project
 - Then please do ... any fixes are welcomed. 
