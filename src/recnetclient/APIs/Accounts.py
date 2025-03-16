@@ -13,9 +13,7 @@ class Accounts:
         return HTTPClient.get(url)
 
 
-    #Currently trying to fix sending auth through FlareSolverr
     def GetMe(HTTPClient : FlareSolverrClient):
-        raise AuthNotImplimentedYet
     
         token = HTTPClient.get_token()
         url = "https://accounts.rec.net/account/me"
