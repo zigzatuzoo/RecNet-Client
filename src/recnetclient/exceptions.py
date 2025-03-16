@@ -22,3 +22,9 @@ class InvalidFlareSolverrMITMProxyInstance(Exception):
     """Raised when the FlareSolverr MITM Proxy Instance is not valid"""
     def __init__(self) -> None:
         super().__init__("FLARESOLVERR_MITMP_INSTANCE environmental variable is not valid! Either check your specified .env file or check your environment variables and try restarting your computer.")
+
+class AuthNotImplimentedYet(Exception):
+    """Raised when trying to contact an endpoint that requires an Auth header"""
+    def __init__(self) -> None:
+        super().__init__("This is an endpoint that requires a Header but we still are trying to fix header support with FlareSolverr. It will not work for the time being.")
+

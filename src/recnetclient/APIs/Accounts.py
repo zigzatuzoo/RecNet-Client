@@ -5,6 +5,8 @@ class Accounts:
     def GetAccountViaUsername(HTTPClient: FlareSolverrClient, Username: str):
         """Returns the userdata of a user using the Username provided.
         
+        Does NOT Requires Auth
+
         Returns: Success(Bool),Response(str or json)"""
         url = "https://apim.rec.net/accounts/account?username="+Username
 

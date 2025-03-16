@@ -89,6 +89,7 @@ class FlareSolverrClient:
         """Sends a GET request through the FlareSolverr instance to the designated URL with specified headers
         
         Returns: Success(bool),Response(str or json)"""
+
         head = {"Content-Type": "application/json"}
 
         headerstr = "?" if (len(headers.keys()) > 0) and (not "?" in url) else ""
@@ -134,7 +135,7 @@ class FlareSolverrClient:
         
         Returns: Success(bool),Response(str or json)"""
 
-        pdata = base64.encode(str(postdata).replace("'",'"').encode('ascii'))
+        pdata = base64.b64encode(str(postdata).replace("'",'"').encode('ascii'))
 
         headers = {"Content-Type": "application/json"}
         data = {
@@ -178,9 +179,9 @@ class FlareSolverrClient:
         for key in headers.keys():
             #$$headers[]=Authorization:mytoken
             headerstr += f'$$headers[]={key}:{headers[key]}'
-            if key != headers.keys()[-1]: headerstr += "&"
+            if key != list(headers.keys())[-1]: headerstr += "&"
         
-        pdata = base64.encode(str(postdata).replace("'",'"').encode('ascii'))
+        pdata = base64.b64encode(str(postdata).replace("'",'"').encode('ascii')).decode('ascii')
 
         data = {
             "cmd": "request.post",
@@ -195,7 +196,7 @@ class FlareSolverrClient:
         resp = self.client.post(self.FlareSolverrURL,headers=head,json=data)
         if resp.status_code == 200:
             data = resp.json()
-        
+
             data = data['solution']['response']
             start = data.find('{')
             end = data.rfind('}')
