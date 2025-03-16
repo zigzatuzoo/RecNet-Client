@@ -92,7 +92,9 @@ class FlareSolverrClient:
 
         head = {"Content-Type": "application/json"}
 
-        headerstr = "?" if (len(headers.keys()) > 0) and (not "?" in url) else ""
+        headers["Content-Type"] = "application/json"
+
+        headerstr = "?" if (len(headers.keys()) > 0) and (not "?" in url) else "&"
         for key in headers.keys():
             #$$headers[]=Authorization:mytoken
             headerstr += f'$$headers[]={key}:{headers[key]}'
@@ -108,11 +110,13 @@ class FlareSolverrClient:
             }
         }
 
-
         resp = self.client.post(self.FlareSolverrURL,headers=head,json=data)
         if resp.status_code == 200:
             data = resp.json()
-        
+
+            if data['solution']['status'] != 200:
+                raise httpx.HTTPStatusError
+
             data = data['solution']['response']
             start = data.find('{')
             end = data.rfind('}')
@@ -175,6 +179,7 @@ class FlareSolverrClient:
         Returns: Success(bool),Response(str or json)"""
 
         head = {"Content-Type": "application/json"}
+        headers["Content-Type"] = "application/json"
 
         headerstr = "?" if (len(headers.keys()) > 0) and (not "?" in url) else ""
         for key in headers.keys():
